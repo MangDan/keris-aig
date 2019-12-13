@@ -14,7 +14,7 @@
         style="max-width:250px"
       ></v-select>
     </v-card-title>
-    <v-list shaped dense height="363px" style="overflow-y:auto">
+    <v-list shaped dense height="350px" style="overflow-y:auto">
       <v-list-item-group multiple v-model="selectedObjs" active-class="brown lighten-5">
         <template v-if="learning_objectives.length">
           <template v-for="(objective, index) in learning_objectives">

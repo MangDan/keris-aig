@@ -38,7 +38,6 @@
         </v-btn>
         -->
       </v-card-title>
-
       <v-list dense style="overflow-y:auto" class="mt-1">
         <template v-if="generatedQhtmls.length">
           <v-list-item-group>
@@ -119,6 +118,7 @@ export default {
     return {
       loading: false,
       objective: null,
+      isActive: false,
       generatedQhtmls: [],
       generatedQhmls: [],
       generatingMsg: "생성 문항을 다운로드 해주세요.",
@@ -212,37 +212,26 @@ export default {
         this.$local.get("../hml/template.hml").then(response => {
           // console.log(template_hml);
 
-          console.log("111");
           templateQuestionsHmlDoc = parser.parseFromString(
             response.data,
             "text/xml"
           );
-          console.log(templateQuestionsHmlDoc);
           templateAnswersHmlDoc = parser.parseFromString(
             response.data,
             "text/xml"
           );
-          console.log("222");
           for (var i = 0; i < this.generatedQhmls.length; i++) {
             decodedTexthml = this.$base64.decode(this.generatedQhmls[i]); // DECODING
-            console.log(decodedTexthml);
+            //console.log(decodedTexthml);
 
             if (window.DOMParser) {
-              console.log("window.DOMParser");
+              //console.log("window.DOMParser");
               decodedHmlDoc = parser.parseFromString(
                 decodedTexthml,
                 "text/xml"
               );
-            } else {
-              console.log("Microsoft.XMLDOM");
-              decodedHmlDoc = new ActiveXObject("Microsoft.XMLDOM");
-              decodedHmlDoc.async = false;
-              decodedHmlDoc.loadXML(decodedTexthml);
             }
 
-            console.log(decodedHmlDoc);
-            console.log("333");
-            console.log(decodedHmlDoc.evaluate);
             if (decodedHmlDoc.evaluate) {
               sectionPnodeSnapshots = decodedHmlDoc.evaluate(
                 "/HWPML/BODY/SECTION/P",
@@ -332,32 +321,25 @@ export default {
 
               // console.log(templateQuestionsHmlDoc);
               // console.log(templateAnswersHmlDoc);
-            } else {
-              console.log("444");
-              var nodes = decodedHmlDoc.selectNodes("/HWPML/BODY/SECTION/P");
-              console.log("nodes");
-              console.log(nodes);
             }
           }
 
           //code for IE
-          if (window.ActiveXObject) {
-            templateQuestionsHml = this.$base64.encode(
-              templateQuestionsHmlDoc.xml
-            );
+          // if (window.ActiveXObject) {
+          //   templateQuestionsHml = this.$base64.encode(
+          //     templateQuestionsHmlDoc.xml
+          //   );
 
-            templateAnswersHml = this.$base64.encode(templateAnswersHmlDoc.xml);
-          }
+          //   templateAnswersHml = this.$base64.encode(templateAnswersHmlDoc.xml);
+          // }
           // code for Chrome, Safari, Firefox, Opera, etc.
-          else {
-            templateQuestionsHml = this.$base64.encode(
-              new XMLSerializer().serializeToString(templateQuestionsHmlDoc)
-            );
+          templateQuestionsHml = this.$base64.encode(
+            new XMLSerializer().serializeToString(templateQuestionsHmlDoc)
+          );
 
-            templateAnswersHml = this.$base64.encode(
-              new XMLSerializer().serializeToString(templateAnswersHmlDoc)
-            );
-          }
+          templateAnswersHml = this.$base64.encode(
+            new XMLSerializer().serializeToString(templateAnswersHmlDoc)
+          );
 
           //console.log(templateQuestionsHml);
           //console.log(templateAnswersHml);
