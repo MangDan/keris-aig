@@ -60,7 +60,7 @@ deploy-to-cluster:
     #     user: $USER_OCID
     #     region: $REGION
     #     private_key: $PRIVATE_KEY
-    #     fingerprint: $FINGERPRIN
+    #     fingerprint: $FINGERPRINT
     - shellcheck
 
     - install-packages:
