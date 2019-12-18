@@ -11,9 +11,13 @@ build:
     - script:
         name: pwd
         code: pwd
+    - pip-install
     - script:
         name: install oci
         code: bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
+    - script:
+        name: confirm oci version
+        code: oci -version
     - install-packages:
         packages: maven
     - script:
