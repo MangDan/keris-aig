@@ -61,6 +61,8 @@ deploy-to-cluster-backend:
     #     region: $REGION
     #     private_key: $PRIVATE_KEY
     #     fingerprint: $FINGERPRINT
+    - install-packages:
+        packages: curl
     - script:
         name: copy private key
         code: cp oci_api_key.pem ~/.oci
