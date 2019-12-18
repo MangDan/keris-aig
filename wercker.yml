@@ -51,7 +51,7 @@ keris-aig-frontend-push:
 #Deploy our container from the Oracle Container Registry to the Oracle Container Engine (Kubernetes)
 deploy-to-cluster-backend:
   box:
-    id: debian:stable-slim
+    id: alpine
     cmd: /bin/sh
   steps:
     - bash-template
@@ -61,8 +61,10 @@ deploy-to-cluster-backend:
     #     region: $REGION
     #     private_key: $PRIVATE_KEY
     #     fingerprint: $FINGERPRINT
-    - install-packages:
-        packages: curl
+    - script:
+        name: install apk packages
+        code: |
+          apk update && apk add curl
     - script:
         name: config
         code: |
