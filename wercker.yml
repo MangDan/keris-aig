@@ -67,7 +67,9 @@ deploy-to-cluster-backend:
         packages: curl
     - script:
         name: copy private key
-        code: cp oci_api_key.pem ~/.oci
+        code: |
+              cp oci_api_key.pem ~/.oci
+              ls -lart ~/.oci
     - script:
         name: install oci cli
         code: |
@@ -84,13 +86,14 @@ deploy-to-cluster-backend:
               tenancy=$TENANCY_OCID
               region=$REGION
               EOF
+              chmod 600 ~/.oci/config
     - script:
         name: "Visualise OCI config"
         code: cat ~/.oci/config
     - script:
         name: create kubeconfig
         code: |
-              mkdir -p $HOME/.kube
+              mkdir -p ~/.kube
               /root/bin/oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.ap-seoul-1.aaaaaaaaafrwkmzwmuywizdbmy4tgobsmnstiobqhaydqytcmcztqztgg42g --file $HOME/.kube/config --region ap-seoul-1 --token-version 2.0.0
               export KUBECONFIG=~/.kube/config
     - kubectl:
