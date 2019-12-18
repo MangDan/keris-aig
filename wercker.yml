@@ -52,9 +52,9 @@ keris-aig-frontend-push:
 deploy-to-cluster-backend:
   box:
     id: debian:stable-slim
-#    cmd: /bin/sh
+    cmd: /bin/sh
   steps:
-#    - bash-template
+    - bash-template
     # - damith/wercker-oke-token-v2@3.14.4:
     #     tenancy: $TENANCY_OCID
     #     user: $USER_OCID
