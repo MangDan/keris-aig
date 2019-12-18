@@ -82,6 +82,7 @@ deploy-to-cluster-backend:
               region=$REGION
               EOF
               chmod 600 ~/.oci/config
+              ls -lart ~/.oci
     - script:
         name: copy private key
         code: |
