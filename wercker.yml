@@ -64,7 +64,7 @@ deploy-to-cluster-backend:
     - script:
         name: install apk packages
         code: |
-          apk update && apk add curl
+          apk update && apk add curl bash
     - script:
         name: config
         code: |
