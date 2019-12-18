@@ -87,6 +87,8 @@ deploy-to-cluster-backend:
               curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh > install.sh
               chmod +x install.sh
               ./install.sh --accept-all-defaults
+              rm -Rf ~/.oci
+              mkdir ~/.oci
               cat > ~/.oci/config << EOF
               [DEFAULT]
               user=$USER_OCID
