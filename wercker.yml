@@ -11,6 +11,9 @@ build:
     - script:
         name: pwd
         code: pwd
+    - script:
+        name: install oci
+        code: bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
     - install-packages:
         packages: maven
     - script:
