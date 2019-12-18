@@ -11,13 +11,6 @@ build:
     - script:
         name: pwd
         code: pwd
-    - pip-install
-    - script:
-        name: install oci
-        code: bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
-    - script:
-        name: confirm oci version
-        code: oci -version
     - install-packages:
         packages: maven
     - script:
@@ -58,8 +51,8 @@ keris-aig-frontend-push:
 #Deploy our container from the Oracle Container Registry to the Oracle Container Engine (Kubernetes)
 deploy-to-cluster-backend:
   box:
-    id: alpine
-    cmd: /bin/sh
+    id: apiaryio/oci-cli
+#    cmd: /bin/sh
 
   steps:
     - bash-template
@@ -67,14 +60,14 @@ deploy-to-cluster-backend:
     - kubectl:
         name: delete secret
         server: $KUBERNETES_MASTER
-        token: $KUBERNETES_AUTH_TOKEN
+#        token: $KUBERNETES_AUTH_TOKEN
         insecure-skip-tls-verify: true
         command: delete secret wercker; echo delete registry secret
 
     - kubectl:
         name: create secret
         server: $KUBERNETES_MASTER
-        token: $KUBERNETES_AUTH_TOKEN
+#        token: $KUBERNETES_AUTH_TOKEN
         insecure-skip-tls-verify: true
         command: create secret docker-registry wercker --docker-server=$DOCKER_REGISTRY --docker-email=nobody@oracle.com --docker-username=$DOCKER_USERNAME --docker-password='$OCI_AUTH_TOKEN'; echo delete registry secret
 
@@ -85,14 +78,14 @@ deploy-to-cluster-backend:
     - kubectl:
         name: deploy keris-aig-backend service to kubernetes
         server: $KUBERNETES_MASTER
-        token: $KUBERNETES_AUTH_TOKEN
+#        token: $KUBERNETES_AUTH_TOKEN
         insecure-skip-tls-verify: true
         command: apply -f kube-keris-aig-backend-config.yml
 
 deploy-to-cluster-frontend:
   box:
-    id: alpine
-    cmd: /bin/sh
+    id: apiaryio/oci-cli
+#    cmd: /bin/sh
 
   steps:
     - bash-template
@@ -104,6 +97,6 @@ deploy-to-cluster-frontend:
     - kubectl:
         name: deploy kube-keris-aig-frontend ui to kubernetes
         server: $KUBERNETES_MASTER
-        token: $KUBERNETES_AUTH_TOKEN
+#        token: $KUBERNETES_AUTH_TOKEN
         insecure-skip-tls-verify: true
         command: apply -f kube-keris-aig-frontend-config.yml
