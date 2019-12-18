@@ -85,23 +85,16 @@ deploy-to-cluster-backend:
         name: install oci cli
         code: |
               curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh > install.sh
-    - script:
-        name: setup oci cli
-        code: |
               chmod +x install.sh
               ./install.sh --accept-all-defaults
-    - script:
-        name: setup oci config
-        code: |
-             mkdir ~/.oci
-             cat > ~/.oci/config << EOF
-             [DEFAULT]
-             user=$USER_OCID
-             fingerprint=$FINGERPRINT
-             key_file=~/.oci/$PRIVATE_KEY
-             tenancy=$TENANCY_OCID
-             region=$REGION
-             EOF
+              cat > ~/.oci/config << EOF
+              [DEFAULT]
+              user=$USER_OCID
+              fingerprint=$FINGERPRINT
+              key_file=~/.oci/$PRIVATE_KEY
+              tenancy=$TENANCY_OCID
+              region=$REGION
+              EOF
     - kubectl:
         name: delete secret
         server: $KUBERNETES_MASTER
