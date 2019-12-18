@@ -71,7 +71,6 @@ deploy-to-cluster:
               curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh > install.sh
               chmod +x install.sh
               ./install.sh --accept-all-defaults
-              export PATH=$PATH:/root/bin
               rm -Rf ~/.oci
               mkdir ~/.oci
               cat > ~/.oci/config << EOF
@@ -94,6 +93,7 @@ deploy-to-cluster:
     - script:
         name: create kubeconfig
         code: |
+              export PATH=$PATH:/root/bin
               mkdir -p ~/.kube
               oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.ap-seoul-1.aaaaaaaaafrwkmzwmuywizdbmy4tgobsmnstiobqhaydqytcmcztqztgg42g --file $HOME/.kube/config --region ap-seoul-1 --token-version 2.0.0
               export KUBECONFIG=~/.kube/config
