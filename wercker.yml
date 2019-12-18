@@ -96,7 +96,7 @@ deploy-to-cluster-backend:
               mkdir -p ~/.kube
               /root/bin/oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.ap-seoul-1.aaaaaaaaafrwkmzwmuywizdbmy4tgobsmnstiobqhaydqytcmcztqztgg42g --file $HOME/.kube/config --region ap-seoul-1 --token-version 2.0.0
               export KUBECONFIG=~/.kube/config
-              cat ~/.kube/config
+              export PATH=$PATH:/root/bin
     - kubectl:
         name: delete secret
         server: $KUBERNETES_MASTER
@@ -112,10 +112,7 @@ deploy-to-cluster-backend:
         command: create secret docker-registry wercker --docker-server=$DOCKER_REGISTRY --docker-email=nobody@oracle.com --docker-username=$DOCKER_USERNAME --docker-password='$OCI_AUTH_TOKEN'; echo create registry secret
     - script:
         name: "Visualise Kubernetes config"
-        code: |
-              pwd
-              ls -lart
-              cat kube-keris-aig-backend-config.yml
+        code: cat kube-keris-aig-backend-config.yml
 
     - kubectl:
         name: deploy keris-aig-backend service to kubernetes
