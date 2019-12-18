@@ -55,7 +55,7 @@ deploy-to-cluster-backend:
 #    cmd: /bin/sh
 
   steps:
-    - bash-template
+#    - bash-template
 
     - kubectl:
         name: delete secret
