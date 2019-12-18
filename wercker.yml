@@ -49,7 +49,7 @@ keris-aig-frontend-push:
         tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT-keris-aig-frontend
 
 #Deploy our container from the Oracle Container Registry to the Oracle Container Engine (Kubernetes)
-deploy-to-cluster-backend:
+deploy-to-cluster:
   box:
     id: debian:stable-slim
 #    cmd: /bin/sh
@@ -120,14 +120,6 @@ deploy-to-cluster-backend:
 #        token: $KUBERNETES_AUTH_TOKEN
         insecure-skip-tls-verify: true
         command: apply -f kube-keris-aig-backend-config.yml
-
-deploy-to-cluster-frontend:
-  box:
-    id: apiaryio/oci-cli
-#    cmd: /bin/sh
-
-  steps:
-    - bash-template
 
     - script:
         name: "Visualise Kubernetes config"
