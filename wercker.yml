@@ -66,7 +66,7 @@ deploy-to-cluster-backend:
         code: cp oci_api_key.pem ~/.oci
     - script:
         name: install oci cli
-         code: |
+        code: |
             curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh > install.sh
             chmod +x install.sh
             ./install.sh --accept-all-defaults
