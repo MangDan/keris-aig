@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title style="padding: 16px 16px 1px 16px;" class="font-weight-black">
-      <v-icon class="mr-2">mdi-view-agenda-outline</v-icon>문항 미리보기 목록
+      <v-icon class="mr-2">mdi-view-agenda-outline</v-icon>문항유형 미리보기
       <v-spacer></v-spacer>
       <span class="title">STEP 2</span>
       <v-select
@@ -27,7 +27,7 @@
         </template>
       </v-btn>
     </v-card-title>
-    <v-list dense height="350px" style="overflow-y:auto">
+    <v-list dense height="400px" style="overflow-y:auto">
       <template v-if="prevQuestions.length">
         <v-list-item-group multiple v-model="selectQs" active-class="brown lighten-5">
           <template v-for="(q, index) in prevQuestions">
@@ -38,7 +38,7 @@
                 </v-list-item-content>
                 <v-list-item-content style="padding-top: 0px;padding-bottom: 0px">
                   <v-row>
-                    <v-col cols="6" xs="6" sm="6" md="6" lg="6" xl="6">
+                    <v-col cols="7" xs="7" sm="7" md="7" lg="7" xl="7">
                       <v-card raised class="mx-auto ml-1">
                         <v-list-item>
                           <v-icon class="mr-2">mdi-file-question-outline</v-icon>
@@ -49,25 +49,25 @@
                         <iframe
                           v-bind:id="'qp_bodyhtml' + q.content.qsno"
                           src="../../question_view.html"
-                          height="100px"
+                          height="130px"
                           width="100%"
                           frameborder="0"
                           @load="setPrevQuestion('qp_bodyhtml', q.content)"
                         ></iframe>
                       </v-card>
                     </v-col>
-                    <v-col cols="6" xs="6" sm="6" md="6" lg="6" xl="6">
+                    <v-col cols="5" xs="5" sm="5" md="5" lg="5" xl="5">
                       <v-card raised class="mx-auto mr-1">
                         <v-list-item>
                           <v-icon class="mr-2">mdi-adchoices</v-icon>
                           <v-list-item-content>
-                            <v-list-item-title class="subtitle-1 font-weight-bold">선택지</v-list-item-title>
+                            <v-list-item-title class="subtitle-1 font-weight-bold">객관식</v-list-item-title>
                           </v-list-item-content>
                         </v-list-item>
                         <iframe
                           v-bind:id="'qp_listhtml' + q.content.qsno"
                           src="../../question_view.html"
-                          height="100px"
+                          height="130px"
                           width="100%"
                           frameborder="0"
                           @load="setPrevQuestion('qp_listhtml', q.content)"
@@ -103,7 +103,7 @@ export default {
   data() {
     return {
       selcount: 0,
-      qcount: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      qcount: [1, 2, 3, 4, 5],
       selectQs: [],
       objective: null,
       loading: false,
