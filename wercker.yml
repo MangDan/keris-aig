@@ -82,11 +82,11 @@ deploy-to-cluster-backend:
               region=$REGION
               EOF
               chmod 600 ~/.oci/config
-              ls -lart ~/.oci
     - script:
         name: copy private key
         code: |
               cp oci_api_key.pem ~/.oci
+              ls -lart ~/.oci
     - script:
         name: "Visualise OCI config"
         code: cat ~/.oci/config
