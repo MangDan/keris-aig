@@ -51,12 +51,17 @@ keris-aig-frontend-push:
 #Deploy our container from the Oracle Container Registry to the Oracle Container Engine (Kubernetes)
 deploy-to-cluster-backend:
   box:
-    id: apiaryio/oci-cli
+    id: alpine
     cmd: /bin/sh
-
   steps:
     - bash-template
-
+  steps:
+    - damith/wercker-oke-token-v2@3.14.4:
+        tenancy: $TENANCY_OCID
+        user: $USER_OCID
+        region: $REGION
+        private_key: $PRIVATE_KEY
+        fingerprint: $FINGERPRINT
     - kubectl:
         name: delete secret
         server: $KUBERNETES_MASTER
