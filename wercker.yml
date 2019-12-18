@@ -51,7 +51,7 @@ keris-aig-frontend-push:
 #Deploy our container from the Oracle Container Registry to the Oracle Container Engine (Kubernetes)
 deploy-to-cluster-backend:
   box:
-    id: alpine
+    id: debian:stable-slim
     cmd: /bin/sh
   steps:
     - bash-template
@@ -63,6 +63,19 @@ deploy-to-cluster-backend:
     #     fingerprint: $FINGERPRINT
     - install-packages:
         packages: curl
+    - script:
+        name: config
+        code: |
+            export KUBERNETES_VERSION="1.15.0"
+            export KUBERNETES_SHA256="fc7b8acda2c1a29475d45cd834bbf96aa90e3ed75ab26711f3e0c02a195345e7"
+            echo "Installing version $KUBERNETES_VERSION of kubernetes"
+    - script:
+        name: fetch kubernetes archive
+        code: |
+            curl -L https://dl.k8s.io/v${KUBERNETES_VERSION}/kubernetes-client-linux-amd64.tar.gz > kubernetes-client-linux-amd64.tar.gz
+            sha256sum kubernetes-client-linux-amd64.tar.gz | grep -q "$KUBERNETES_SHA256"
+            tar xvzf kubernetes-client-linux-amd64.tar.gz
+            kubernetes/client/bin/kubectl version --client
     - script:
         name: copy private key
         code: cp oci_api_key.pem ~/.oci
