@@ -66,19 +66,6 @@ deploy-to-cluster-backend:
     - install-packages:
         packages: curl
     - script:
-        name: config
-        code: |
-            export KUBERNETES_VERSION="1.15.0"
-            export KUBERNETES_SHA256="fc7b8acda2c1a29475d45cd834bbf96aa90e3ed75ab26711f3e0c02a195345e7"
-            echo "Installing version $KUBERNETES_VERSION of kubernetes"
-    - script:
-        name: fetch kubernetes archive
-        code: |
-            curl -L https://dl.k8s.io/v${KUBERNETES_VERSION}/kubernetes-client-linux-amd64.tar.gz > kubernetes-client-linux-amd64.tar.gz
-            sha256sum kubernetes-client-linux-amd64.tar.gz | grep -q "$KUBERNETES_SHA256"
-            tar xvzf kubernetes-client-linux-amd64.tar.gz
-            kubernetes/client/bin/kubectl version --client
-    - script:
         name: copy private key
         code: cp oci_api_key.pem ~/.oci
     - script:
@@ -109,7 +96,7 @@ deploy-to-cluster-backend:
         server: $KUBERNETES_MASTER
 #        token: $KUBERNETES_AUTH_TOKEN
         insecure-skip-tls-verify: true
-        command: create secret docker-registry wercker --docker-server=$DOCKER_REGISTRY --docker-email=nobody@oracle.com --docker-username=$DOCKER_USERNAME --docker-password='$OCI_AUTH_TOKEN'; echo delete registry secret
+        command: create secret docker-registry wercker --docker-server=$DOCKER_REGISTRY --docker-email=nobody@oracle.com --docker-username=$DOCKER_USERNAME --docker-password='$OCI_AUTH_TOKEN'; echo create registry secret
 
     - script:
         name: "Visualise Kubernetes config"
