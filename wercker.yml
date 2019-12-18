@@ -52,10 +52,10 @@ keris-aig-frontend-push:
 deploy-to-cluster-backend:
   box:
     id: apiaryio/oci-cli
-#    cmd: /bin/sh
+    cmd: /bin/sh
 
   steps:
-#    - bash-template
+    - bash-template
 
     - kubectl:
         name: delete secret
