@@ -55,7 +55,6 @@ deploy-to-cluster-backend:
     cmd: /bin/sh
   steps:
     - bash-template
-  steps:
     - damith/wercker-oke-token-v2@3.14.4:
         tenancy: $TENANCY_OCID
         user: $USER_OCID
