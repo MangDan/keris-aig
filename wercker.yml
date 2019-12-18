@@ -113,6 +113,7 @@ deploy-to-cluster-backend:
     - script:
         name: "Visualise Kubernetes config"
         code: |
+              pwd
               ls -lart
               cat kube-keris-aig-backend-config.yml
 
