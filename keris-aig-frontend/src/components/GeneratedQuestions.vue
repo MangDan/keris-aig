@@ -75,7 +75,7 @@
                           <v-list-item>
                             <v-icon class="mr-2">mdi-adchoices</v-icon>
                             <v-list-item-content>
-                              <v-list-item-title class="subtitle-1 font-weight-bold">선택지</v-list-item-title>
+                              <v-list-item-title class="subtitle-1 font-weight-bold">객관식</v-list-item-title>
                             </v-list-item-content>
                           </v-list-item>
                           <iframe
