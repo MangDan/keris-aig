@@ -84,9 +84,15 @@ deploy-to-cluster-backend:
     - script:
         name: install oci cli
         code: |
-             curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh > install.sh
-             chmod +x install.sh
-             ./install.sh --accept-all-defaults
+              curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh > install.sh
+    - script:
+        name: setup oci cli
+        code: |
+              chmod +x install.sh
+              ./install.sh --accept-all-defaults
+    - script:
+        name: setup oci config
+        code: |
              mkdir ~/.oci
              cat > ~/.oci/config << EOF
              [DEFAULT]
