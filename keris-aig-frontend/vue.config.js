@@ -3,8 +3,6 @@ module.exports = {
     "vuetify"
   ],
   devServer: {
-
     overlay: false
-
   }
 }
