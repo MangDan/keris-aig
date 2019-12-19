@@ -6,8 +6,8 @@ module.exports = {
   ],
   configureWebpack: {
     devServer: {
-      host: 'localhost',
-      port: '8080'
+      host: 'aig.edunet.net',
+      port: '80'
     }
   }
 }
