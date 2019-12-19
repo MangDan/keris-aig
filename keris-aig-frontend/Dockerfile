@@ -9,7 +9,7 @@ WORKDIR /usr/src/app
 # 현재 Dockerfile 있는 경로의 모든 파일을 /app 에 복사
 COPY . /usr/src/app
 # npm install 을 실행
-RUN npm install --production
+RUN npm install
 
 RUN npm run build
 
