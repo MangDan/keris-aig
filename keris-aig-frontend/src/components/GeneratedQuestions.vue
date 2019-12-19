@@ -237,7 +237,6 @@ export default {
     },
     downloadHmlFilesForMSIE() {
       var zip = new JsZip(); // **ReferenceError: JSZip is not defined**
-      var uri, idx, content;
 
       console.log(this.generatedQhmlStems);
       console.log(this.generatedQhmlAnswers);
@@ -245,7 +244,6 @@ export default {
       //console.log("downloadHmlFiles");
       //console.log(this.generatedQhmls[0]);
 
-      let downloadedCount = 0;
       if (this.generatedQhmlStems.length == 0) {
         this.$EventBus.$emit(
           "popAlertMessageToHome",
@@ -254,28 +252,42 @@ export default {
         return;
       } else {
         for (var i = 0; i < this.generatedQhmlStems.length; i++) {
-          uri = "data:binary;base64," + this.generatedQhmlStems[i];
-          idx = uri.indexOf("base64,") + "base64,".length; // or = 28 if you're sure about the prefix
-          content = uri.substring(idx);
-          zip.file("문제(" + i + ").hwp", content, { base64: true });
-
-          uri = "data:binary;base64," + this.generatedQhmlAnswers[i];
-          idx = uri.indexOf("base64,") + "base64,".length; // or = 28 if you're sure about the prefix
-          content = uri.substring(idx);
-          zip.file("해설(" + i + ").hwp", content, { base64: true });
-          downloadedCount++;
+          console.log(
+            "this.generatedQhmlStems[i] : " + this.generatedQhmlStems[i]
+          );
+          zip.file(
+            "문제(" + i + ").hwp",
+            ("data:binary;base64," + this.generatedQhmlStems[i]).substring(
+              ("data:binary;base64," + this.generatedQhmlStems[i]).indexOf(
+                "base64,"
+              ) + "base64,".length
+            ),
+            { base64: true }
+          );
+          console.log(
+            "this.generatedQhmlAnswers[i] : " + this.generatedQhmlAnswers[i]
+          );
+          zip.file(
+            "해설(" + i + ").hwp",
+            ("data:binary;base64," + this.generatedQhmlAnswers[i]).substring(
+              ("data:binary;base64," + this.generatedQhmlAnswers[i]).indexOf(
+                "base64,"
+              ) + "base64,".length
+            ),
+            { base64: true }
+          );
         }
       }
-
+      console.log("1111");
       zip.generateAsync({ type: "blob" }).then(function(blob) {
         saveAs(blob, "문제집.zip");
       });
-
+      console.log("2222");
       this.$EventBus.$emit(
         "generaionSnackBarToHome",
-        downloadedCount +
-          "개의 hwp 파일이 포함된 zip파일이 다운로드 되었습니다."
+        "파일이 다운로드 되었습니다."
       );
+      console.log("3333");
     },
     downloadHmlFilesForOther() {
       var zip = new JsZip(); // **ReferenceError: JSZip is not defined**
