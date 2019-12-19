@@ -1,8 +1,13 @@
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
+
 module.exports = {
   "transpileDependencies": [
     "vuetify"
   ],
-  devServer: {
-    overlay: false
+  configureWebpack: {
+    devServer: {
+      host: 'localhost',
+      port: '8080'
+    }
   }
 }
