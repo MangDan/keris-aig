@@ -13,7 +13,13 @@
       </router-link>
     </div>
     <v-spacer></v-spacer>
-
-    <span class="mr-2 headline font-weight-thin">MathGenie</span>
+    <v-img
+      alt="MathGenie"
+      class="shrink mr-2"
+      contain
+      src="../assets/mathgenie.png"
+      transition="scale-transition"
+      width="220"
+    />
   </v-app-bar>
 </template>

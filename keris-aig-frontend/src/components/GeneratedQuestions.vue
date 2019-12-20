@@ -278,16 +278,13 @@ export default {
           );
         }
       }
-      console.log("1111");
       zip.generateAsync({ type: "blob" }).then(function(blob) {
         saveAs(blob, "문제집.zip");
       });
-      console.log("2222");
       this.$EventBus.$emit(
         "generaionSnackBarToHome",
         "파일이 다운로드 되었습니다."
       );
-      console.log("3333");
     },
     downloadHmlFilesForOther() {
       var zip = new JsZip(); // **ReferenceError: JSZip is not defined**
@@ -432,12 +429,10 @@ export default {
         //   templateAnswersHml = this.$base64.encode(templateAnswersHmlDoc.xml);
         // }
         // code for Chrome, Safari, Firefox, Opera, etc.
-        console.log(templateQuestionsHmlDoc);
         templateQuestionsHml = this.$base64.encode(
           new XMLSerializer().serializeToString(templateQuestionsHmlDoc)
         );
 
-        console.log(templateAnswersHmlDoc);
         templateAnswersHml = this.$base64.encode(
           new XMLSerializer().serializeToString(templateAnswersHmlDoc)
         );
