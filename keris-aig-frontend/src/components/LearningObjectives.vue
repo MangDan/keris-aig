@@ -11,7 +11,7 @@
         append-outer-icon="search"
         label="선택"
         @click:append-outer="searchGradeUnits"
-        style="max-width:300px"
+        style="max-width:330px"
       ></v-select>
     </v-card-title>
     <v-list shaped dense height="400px" style="overflow-y:auto">
