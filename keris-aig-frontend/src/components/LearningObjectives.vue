@@ -62,29 +62,40 @@ export default {
     };
   },
   mounted() {
-    this.loadGradeUnit();
+    try {
+      this.loadGradeUnit();
+    } catch (e) {
+      setTimeout(function() {
+        this.loadGradeUnit();
+      }, 500);
+    }
   },
   methods: {
     loadGradeUnit() {
-      this.$axios.get("/api/v1/kerisaig/query/gradeunit").then(response => {
-        for (var i = 0; i < response.data.length; i++) {
-          if (response.data[i].unitValue != null) {
-            this.gradeunits.push({
-              text:
-                response.data[i].eduGubn +
-                " " +
-                response.data[i].schoolYear +
-                "학년 " +
-                response.data[i].semester +
-                "학기 " +
-                (response.data[i].unitValue == null
-                  ? ""
-                  : response.data[i].unitValue),
-              value: response.data[i].guno
-            });
+      this.$axios
+        .get("/api/v1/kerisaig/query/gradeunit")
+        .then(response => {
+          for (var i = 0; i < response.data.length; i++) {
+            if (response.data[i].unitValue != null) {
+              this.gradeunits.push({
+                text:
+                  response.data[i].eduGubn +
+                  " " +
+                  response.data[i].schoolYear +
+                  "학년 " +
+                  response.data[i].semester +
+                  "학기 " +
+                  (response.data[i].unitValue == null
+                    ? ""
+                    : response.data[i].unitValue),
+                value: response.data[i].guno
+              });
+            }
           }
-        }
-      });
+        })
+        .catch(error => {
+          throw error;
+        });
     },
     searchGradeUnits() {
       /* eslint-disable no-console */

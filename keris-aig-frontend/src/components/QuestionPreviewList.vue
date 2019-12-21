@@ -46,7 +46,10 @@
                             <v-list-item-title class="subtitle-1 font-weight-bold">문항 내용</v-list-item-title>
                           </v-list-item-content>
                         </v-list-item>
-                        <QuestionView v-bind:html="q.content.bodyhtml" />
+                        <QuestionView
+                          v-bind:id="'bodyhtml' + q.content.qsno"
+                          v-bind:html="q.content.bodyhtml"
+                        />
                       </v-card>
                     </v-col>
                     <v-col cols="5" xs="5" sm="5" md="5" lg="5" xl="5">
@@ -57,7 +60,10 @@
                             <v-list-item-title class="subtitle-1 font-weight-bold">객관식</v-list-item-title>
                           </v-list-item-content>
                         </v-list-item>
-                        <QuestionView v-bind:html="q.content.listhtml" />
+                        <QuestionView
+                          v-bind:id="'listhtml' + q.content.qsno"
+                          v-bind:html="q.content.listhtml"
+                        />
                       </v-card>
                     </v-col>
                   </v-row>
@@ -105,7 +111,7 @@ export default {
       generatedh: []
     };
   },
-  created() {
+  mounted() {
     this.$EventBus.$on(
       "queryQuestionPreviewList",
       function(objectives) {
