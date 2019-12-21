@@ -62,13 +62,7 @@ export default {
     };
   },
   mounted() {
-    try {
-      this.loadGradeUnit();
-    } catch (e) {
-      setTimeout(function() {
-        this.loadGradeUnit();
-      }, 500);
-    }
+    this.loadGradeUnit();
   },
   methods: {
     loadGradeUnit() {
@@ -94,7 +88,9 @@ export default {
           }
         })
         .catch(error => {
-          throw error;
+          /* eslint-disable no-console */
+          console.log(error);
+          this.loadGradeUnit();
         });
     },
     searchGradeUnits() {
