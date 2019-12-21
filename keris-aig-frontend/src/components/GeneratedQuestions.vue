@@ -114,6 +114,7 @@ import JsZip from "jszip";
 import saveAs from "file-saver";
 
 export default {
+  name: "GeneratedQuestions",
   data() {
     return {
       loading: false,

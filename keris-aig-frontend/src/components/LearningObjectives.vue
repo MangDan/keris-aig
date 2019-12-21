@@ -51,6 +51,7 @@
 
 <script>
 export default {
+  name: "LearningObjectives",
   data() {
     return {
       search: "",

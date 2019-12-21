@@ -5,6 +5,12 @@ export default {
     return {
       selcount: 0
     };
+  },
+  created() {
+    MathJax.Hub.Config({
+      showMathMenu: false,
+      tex2jax: { displayMath: [["$$", "$$"]] }
+    });
   }
 };
 </script>
