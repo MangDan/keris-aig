@@ -175,12 +175,21 @@ export default {
           document
             .getElementById(ref + q.qsno)
             .contentWindow.setHtml(q.bodyhtml);
-        else if (ref == "qp_listhtml")
-          document
-            .getElementById(ref + q.qsno)
-            .contentWindow.setHtml(q.listhtml);
+        else if (ref == "qp_listhtml") {
+          try {
+            document
+              .getElementById(ref + q.qsno)
+              .contentWindow.setHtml(q.listhtml);
+          } catch (e) {
+            setTimeout(function() {
+              document
+                .getElementById(ref + q.qsno)
+                .contentWindow.setHtml(q.listhtml);
+            }, 500);
+          }
+        }
         //this.$refs[ref + q.qsno].contentWindow.setHtml(q.bodyhtml);
-      }, 50);
+      }, 100);
 
       // if (iframe) {
       //   console.log(this.$refs[ref + q.qsno].contentWindow);

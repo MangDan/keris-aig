@@ -60,7 +60,7 @@ export default {
       gradeunits: ["선택"]
     };
   },
-  created() {
+  mounted() {
     this.$axios.get("/api/v1/kerisaig/query/gradeunit").then(response => {
       /* eslint-disable no-console */
       // console.log(response.data[i].schoolYear);
