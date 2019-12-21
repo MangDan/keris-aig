@@ -46,14 +46,7 @@
                             <v-list-item-title class="subtitle-1 font-weight-bold">문항 내용</v-list-item-title>
                           </v-list-item-content>
                         </v-list-item>
-                        <iframe
-                          v-bind:id="'qp_bodyhtml' + q.content.qsno"
-                          src="../../question_view.html"
-                          height="130px"
-                          width="100%"
-                          frameborder="0"
-                          @load="setPrevQuestion('qp_bodyhtml', q.content)"
-                        ></iframe>
+                        <QuestionView v-bind:html="q.content.bodyhtml" />
                       </v-card>
                     </v-col>
                     <v-col cols="5" xs="5" sm="5" md="5" lg="5" xl="5">
@@ -64,14 +57,7 @@
                             <v-list-item-title class="subtitle-1 font-weight-bold">객관식</v-list-item-title>
                           </v-list-item-content>
                         </v-list-item>
-                        <iframe
-                          v-bind:id="'qp_listhtml' + q.content.qsno"
-                          src="../../question_view.html"
-                          height="130px"
-                          width="100%"
-                          frameborder="0"
-                          @load="setPrevQuestion('qp_listhtml', q.content)"
-                        ></iframe>
+                        <QuestionView v-bind:html="q.content.listhtml" />
                       </v-card>
                     </v-col>
                   </v-row>
@@ -99,8 +85,13 @@
   </v-card>
 </template>
 <script>
+import QuestionView from "./QuestionView";
+
 export default {
   name: "QuestionList",
+  components: {
+    QuestionView
+  },
   data() {
     return {
       selcount: 0,

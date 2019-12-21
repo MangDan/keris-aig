@@ -60,14 +60,7 @@
                               <v-list-item-title class="subtitle-1 font-weight-bold">문항 내용</v-list-item-title>
                             </v-list-item-content>
                           </v-list-item>
-                          <iframe
-                            v-bind:id="'gq_bodyhtml' + index"
-                            src="../../question_view.html"
-                            height="130px"
-                            width="100%"
-                            frameborder="0"
-                            @load="setGeneratedQuestion('gq_bodyhtml', index, generatedQhtml.html.body_html)"
-                          ></iframe>
+                          <QuestionView v-bind:html="generatedQhtml.html.body_html" />
                         </v-card>
                       </v-col>
                       <v-col cols="5" xs="5" sm="5" md="5" lg="5" xl="5">
@@ -78,14 +71,7 @@
                               <v-list-item-title class="subtitle-1 font-weight-bold">객관식</v-list-item-title>
                             </v-list-item-content>
                           </v-list-item>
-                          <iframe
-                            v-bind:id="'gq_listhtml' + index"
-                            src="../../question_view.html"
-                            height="130px"
-                            width="100%"
-                            frameborder="0"
-                            @load="setGeneratedQuestion('gq_listhtml', index, generatedQhtml.html.list_html)"
-                          ></iframe>
+                          <QuestionView v-bind:html="generatedQhtml.html.list_html" />
                         </v-card>
                       </v-col>
                     </v-row>
@@ -112,9 +98,13 @@
 <script>
 import JsZip from "jszip";
 import saveAs from "file-saver";
+import QuestionView from "./QuestionView";
 
 export default {
   name: "GeneratedQuestions",
+  components: {
+    QuestionView
+  },
   data() {
     return {
       loading: false,

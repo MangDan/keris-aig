@@ -62,29 +62,30 @@ export default {
     };
   },
   mounted() {
-    this.$axios.get("/api/v1/kerisaig/query/gradeunit").then(response => {
-      /* eslint-disable no-console */
-      // console.log(response.data[i].schoolYear);
-      for (var i = 0; i < response.data.length; i++) {
-        if (response.data[i].unitValue != null) {
-          this.gradeunits.push({
-            text:
-              response.data[i].eduGubn +
-              " " +
-              response.data[i].schoolYear +
-              "학년 " +
-              response.data[i].semester +
-              "학기 " +
-              (response.data[i].unitValue == null
-                ? ""
-                : response.data[i].unitValue),
-            value: response.data[i].guno
-          });
-        }
-      }
-    });
+    this.loadGradeUnit();
   },
   methods: {
+    loadGradeUnit() {
+      this.$axios.get("/api/v1/kerisaig/query/gradeunit").then(response => {
+        for (var i = 0; i < response.data.length; i++) {
+          if (response.data[i].unitValue != null) {
+            this.gradeunits.push({
+              text:
+                response.data[i].eduGubn +
+                " " +
+                response.data[i].schoolYear +
+                "학년 " +
+                response.data[i].semester +
+                "학기 " +
+                (response.data[i].unitValue == null
+                  ? ""
+                  : response.data[i].unitValue),
+              value: response.data[i].guno
+            });
+          }
+        }
+      });
+    },
     searchGradeUnits() {
       /* eslint-disable no-console */
       //console.log(this.selgradeunit);
