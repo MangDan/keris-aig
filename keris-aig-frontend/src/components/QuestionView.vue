@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="display:none;">$$\require{cancel}$$</div>
-    <div class="container" style="height:135px;overflow:scroll">
+    <div class="container" style="height:135px;overflow-y:auto">
       <div id="html" class="content" v-html="html"></div>
     </div>
   </div>
