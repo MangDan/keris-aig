@@ -304,7 +304,7 @@ export default {
         _this
           .$detection({
             method: "post",
-            url: "/cms.iscream.cceapi.com/cms_api/model_information/",
+            url: "/keris_aig/detect_api/model_information/",
             data: formBody,
             headers: { "Content-Type": "multipart/form-data" }
           })
@@ -333,7 +333,7 @@ export default {
         _this
           .$generation({
             method: "post",
-            url: "/cms.iscream.cceapi.com/cms_api/create_question/",
+            url: "/keris_aig/generate_api/create_question/",
             data: formBody,
             headers: { "Content-Type": "multipart/form-data" }
           })
