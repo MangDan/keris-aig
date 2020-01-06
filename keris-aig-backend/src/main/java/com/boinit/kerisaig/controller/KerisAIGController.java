@@ -1,13 +1,16 @@
 package com.boinit.kerisaig.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import com.boinit.kerisaig.jpa.GradeUnitRepository;
 import com.boinit.kerisaig.jpa.LearningObjectiveRepository;
+import com.boinit.kerisaig.jpa.ModelDownloadRepository;
 import com.boinit.kerisaig.jpa.QuestionRepository;
 import com.boinit.kerisaig.repository.entity.GradeUnit;
 import com.boinit.kerisaig.repository.entity.LearningObjective;
+import com.boinit.kerisaig.repository.entity.ModelDownload;
 import com.boinit.kerisaig.repository.entity.Question;
 import com.boinit.kerisaig.service.QuestionConsumer;
 
@@ -41,6 +44,9 @@ public class KerisAIGController {
 
     @Autowired
     QuestionRepository questionsRepository;
+
+    @Autowired
+    ModelDownloadRepository modelDownloadRepository;
 
     Logger logger = LoggerFactory.getLogger(KerisAIGController.class);
 
@@ -82,6 +88,35 @@ public class KerisAIGController {
     public Optional<Question> generationQuestion(@RequestBody Question question) throws Exception {
         // Optional<Question> questions = questionsRepository.findByQsno(qsno);
         return null;
+    }
+
+    @RequestMapping(value = "/api/v1/kerisaig/history/model/download", method = RequestMethod.POST)
+    public List<ModelDownload> historyModelDownload(String[] modelid) throws Exception {
+        if (modelid.length <= 0) {
+            return null;
+        }
+
+        List<ModelDownload> results = new ArrayList<ModelDownload>();
+        for (String mid : modelid) {
+            logger.info(mid);
+
+            ModelDownload instance = null;
+            Optional<ModelDownload> optionalPost = modelDownloadRepository.findByModelID(mid);
+            if (optionalPost.isPresent()) {
+                instance = optionalPost.get();
+                instance.setDownloadCount(instance.getDownloadCount() + 1);
+            } else {
+                instance = new ModelDownload();
+                instance.setModelID(mid);
+                instance.setDownloadCount(1);
+            }
+
+            modelDownloadRepository.save(instance);
+            logger.info(instance.getModelID() + " : " + instance.getDownloadCount());
+            results.add(instance);
+        }
+
+        return results;
     }
 
     public static void main(String[] args) {
