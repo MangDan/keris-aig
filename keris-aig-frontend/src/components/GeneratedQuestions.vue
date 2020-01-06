@@ -235,7 +235,7 @@ export default {
     },
     sendDownloadHistory() {
       // TODO: 다운로드 받은 ID를 저장하자
-      console.log("다운로드 모델 IDs: " + this.generatedQhmlModelIDs);
+      //console.log("다운로드 모델 IDs: " + this.generatedQhmlModelIDs);
 
       var _this = this;
       /* eslint-disable no-console */
@@ -243,7 +243,7 @@ export default {
       var formBody = new FormData();
       this.generatedQhmlModelIDs.forEach(modelid => {
         formBody.append("modelid", modelid);
-        console.log("modelid: " + modelid);
+        //console.log("modelid: " + modelid);
       });
       return new Promise((resolve, reject) => {
         _this
@@ -254,12 +254,13 @@ export default {
             headers: { "Content-Type": "form-data" }
           })
           .then(result => {
-            console.log(result.data);
+            //console.log(result.data);
+            resolve(result.data);
           })
           .catch(error => {
             //handle error
-            //reject(error);
-            console.log(error);
+            reject(error);
+            //console.log(error);
           });
       });
     },
