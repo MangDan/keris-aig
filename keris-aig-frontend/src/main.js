@@ -30,7 +30,7 @@ const generation = axios.create({
 
 const iscream = axios.create({
   //baseURL: 'http://cms.aimath.home-learn.com',
-  baseURL: 'http://132.145.90.23:11720',
+  baseURL: 'http://boinit.mynetgear.com:11720',
   headers: {
     'Content-Type': 'multipart/form-data'
   }
