@@ -94,6 +94,7 @@ deploy-to-cluster:
               name: create kubeconfig
               code: |
                   echo $PATH
+                  export OCI_CLI_SUPPRESS_FILE_PERMISSIONS_WARNING=True
                   export PATH=$PATH:/root/bin
                   mkdir -p ~/.kube
                   $OCICLI_GET_KEY_COMMAND
