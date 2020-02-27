@@ -97,6 +97,7 @@ deploy-to-cluster:
                   export OCI_CLI_SUPPRESS_FILE_PERMISSIONS_WARNING=True
                   export PATH=$PATH:/root/bin
                   mkdir -p ~/.kube
+                  oci setup repair-file-permissions --file ~/.oci/config
                   $OCICLI_GET_KEY_COMMAND
                   export KUBECONFIG=~/.kube/config
         - kubectl:
