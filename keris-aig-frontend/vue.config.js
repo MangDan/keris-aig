@@ -6,10 +6,10 @@ module.exports = {
   ],
   configureWebpack: {
     devServer: {
-      host: 'aig.edunet.net',
-      port: '80'
-      //host: 'localhost',
-      //port: '8080'
+      //host: 'aig.edunet.net',
+      //port: '80'
+      host: 'localhost',
+      port: '8080'
     }
   }
 }
